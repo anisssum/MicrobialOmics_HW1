@@ -1,0 +1,17 @@
+name: ncldv-gene-package
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.11
+  - prodigal=2.6.3
+  - mmseqs2
+  - diamond
+  - mafft
+  - iqtree>=2.3
+  - paml=4.10
+  - biopython
+  - pandas
+  - numpy
+  - scipy
+  - statsmodels
+  - matplotlib
+  - python-pptx  # only for building the slide deck (optional)
