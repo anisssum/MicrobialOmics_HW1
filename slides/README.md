@@ -5,6 +5,5 @@
 3. Result 1: stolen genes are under purifying selection (median ω = 0.10, 97 % reject ω = 1) (Fig. 2)
 4. Result 2 and conclusion: conservation sits in the host-homologous domain; promoters are constrained but looser (Fig. 3)
 
-The deck is a Claude Slides artifact: https://claude.ai/artifact/YTHfzGXQ898PzAenyiFzCE
-Export it from the deck page (Share → Export → PDF/PPTX) and put the file here as `slides.pdf`.
+Files: `Project_1_NCLDV_gene_package.pptx` (course template, with speaker notes) and `.pdf`.
 All figures in the deck are `results/figures/*.png`.
