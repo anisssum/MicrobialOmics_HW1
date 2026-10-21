@@ -1,0 +1,148 @@
+# dN/dS dataset: 1402 clade-OG estimates, 1342 after dS filter (0.01 < median pairwise dS < 1.5)
+
+## Genomes per clade
+clade
+Osy           40
+SAG           37
+Pbi           25
+NC64A         23
+unassigned     7
+
+## Orthogroups per class (global)
+class
+Accessory ORFan         1315
+Core viral               150
+Accessory algal-like     144
+Core algal-like           33
+
+## Genes per genome by class (median [min-max])
+  Core viral: 161 [149-192]  (43.3% of genes)
+  Core algal-like: 36 [30-44]  (9.5% of genes)
+  Accessory algal-like: 27 [14-38]  (7.2% of genes)
+  Accessory ORFan: 150 [104-224]  (40.4% of genes)
+
+## Estimates per clade x class
+class  Accessory ORFan  Accessory algal-like  Core algal-like  Core viral
+clade                                                                    
+NC64A              130                    28               30         144
+Osy                154                    36               31         146
+Pbi                107                    23               32         145
+SAG                133                    30               30         143
+
+# H1. Do accessory algal-like ('stolen') genes evolve neutrally (omega = 1)?
+                        n  median_omega    q25    q75
+class                                                
+Core viral            578         0.095  0.064  0.138
+Core algal-like       123         0.089  0.059  0.125
+Accessory algal-like  117         0.104  0.066  0.163
+Accessory ORFan       524         0.177  0.122  0.281
+
+Per-gene LRT (codeml M0 vs omega=1, BH q<0.05):
+regime                not different from neutral  omega > 1  purifying (omega < 1)
+class                                                                             
+Core viral                                     2          0                    576
+Core algal-like                                2          0                    121
+Accessory algal-like                           3          0                    114
+Accessory ORFan                               49          1                    474
+regime                not different from neutral  omega > 1  purifying (omega < 1)
+class                                                                             
+Core viral                                   0.3        0.0                   99.7
+Core algal-like                              1.6        0.0                   98.4
+Accessory algal-like                         2.6        0.0                   97.4
+Accessory ORFan                              9.4        0.2                   90.5
+  one-sample Wilcoxon log10(omega)=0, Core viral: n=578, p < 1e-10
+  one-sample Wilcoxon log10(omega)=0, Core algal-like: n=123, p < 1e-10
+  one-sample Wilcoxon log10(omega)=0, Accessory algal-like: n=117, p < 1e-10
+  one-sample Wilcoxon log10(omega)=0, Accessory ORFan: n=524, p < 1e-10
+
+## Class differences within each clade (Kruskal-Wallis; MWU stolen vs others, Cliff's delta)
+  NC64A: KW H=49.5, p = 1.0e-10; medians Core viral=0.098, Core algal-like=0.088, Accessory algal-like=0.109, Accessory ORFan=0.165
+  Osy: KW H=83.7, p < 1e-10; medians Core viral=0.121, Core algal-like=0.105, Accessory algal-like=0.124, Accessory ORFan=0.216
+  SAG: KW H=114.1, p < 1e-10; medians Core viral=0.079, Core algal-like=0.059, Accessory algal-like=0.083, Accessory ORFan=0.160
+  Pbi: KW H=65.3, p < 1e-10; medians Core viral=0.089, Core algal-like=0.101, Accessory algal-like=0.096, Accessory ORFan=0.162
+clade                              comparison  n1  n2  median1  median2      U      p  cliffs_delta      q
+NC64A      Accessory algal-like vs Core viral  28 144   0.1086   0.0980 2297.5 0.2438        0.1396 0.4733
+NC64A Accessory algal-like vs Core algal-like  28  30   0.1086   0.0877  485.0 0.3155        0.1548 0.4733
+NC64A Accessory algal-like vs Accessory ORFan  28 130   0.1086   0.1649 1321.0 0.0232       -0.2742 0.0557
+  Osy      Accessory algal-like vs Core viral  36 146   0.1239   0.1212 2643.0 0.9592        0.0057 0.9592
+  Osy Accessory algal-like vs Core algal-like  36  31   0.1239   0.1053  640.0 0.3054        0.1470 0.4733
+  Osy Accessory algal-like vs Accessory ORFan  36 154   0.1239   0.2160 1265.0 0.0000       -0.5437 0.0000
+  SAG      Accessory algal-like vs Core viral  30 143   0.0826   0.0791 2322.0 0.4791        0.0825 0.5750
+  SAG Accessory algal-like vs Core algal-like  30  30   0.0826   0.0590  610.0 0.0184        0.3556 0.0551
+  SAG Accessory algal-like vs Accessory ORFan  30 133   0.0826   0.1595  837.0 0.0000       -0.5805 0.0000
+  Pbi      Accessory algal-like vs Core viral  23 145   0.0962   0.0889 1847.5 0.4075        0.1079 0.5434
+  Pbi Accessory algal-like vs Core algal-like  23  32   0.0962   0.1010  388.0 0.7393        0.0543 0.8066
+  Pbi Accessory algal-like vs Accessory ORFan  23 107   0.0962   0.1623  666.0 0.0006       -0.4588 0.0023
+
+## Pooled model: log10(omega) ~ class + clade + log10(dS) + log10(length); SE clustered by OG
+==============================================================================================================================
+                                                                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------------------------------------------
+Intercept                                                     -1.1351      0.104    -10.934      0.000      -1.339      -0.932
+C(gclass, Treatment('Core viral'))[T.Accessory ORFan]          0.2872      0.025     11.550      0.000       0.238       0.336
+C(gclass, Treatment('Core viral'))[T.Accessory algal-like]     0.0394      0.041      0.951      0.342      -0.042       0.121
+C(gclass, Treatment('Core viral'))[T.Core algal-like]         -0.0127      0.047     -0.271      0.786      -0.105       0.079
+C(clade)[T.Osy]                                                0.1852      0.022      8.542      0.000       0.143       0.228
+C(clade)[T.Pbi]                                                0.0317      0.023      1.365      0.172      -0.014       0.077
+C(clade)[T.SAG]                                                0.0572      0.026      2.222      0.026       0.007       0.108
+log_dS                                                        -0.1340      0.028     -4.781      0.000      -0.189      -0.079
+log_len                                                       -0.0254      0.043     -0.593      0.553      -0.109       0.058
+==============================================================================================================================
+  R2 = 0.241, n = 1342
+
+## Recency of acquisition: omega vs identity to the Chlorella variabilis homolog (algal-like genes)
+  Accessory algal-like: Spearman rho = -0.099, p = 0.358, n = 88
+  Core algal-like: Spearman rho = -0.121, p = 0.234, n = 99
+  all algal-like: rho = -0.072, p = 0.325, n = 187
+
+# H2. Are there conserved regions inside stolen genes?
+Conservation heterogeneity along the protein (window variance vs permutation; BH q<0.05):
+                        n  frac_heterogeneous  median_ratio
+class                                                      
+Core viral            573               0.377         1.567
+Core algal-like       123               0.455         1.619
+Accessory algal-like  117               0.513         1.546
+Accessory ORFan       522               0.414         1.637
+  chi2 = 8.8, df = 3, p = 0.033
+  Accessory algal-like: pi_aa host-homologous = 0.0307 vs non-homologous = 0.1075; paired Wilcoxon p = 1.2e-10, n = 69; non-hom more variable in 84%
+  Core algal-like: pi_aa host-homologous = 0.0476 vs non-homologous = 0.0906; paired Wilcoxon p < 1e-10, n = 78; non-hom more variable in 87%
+
+# H3. Is the upstream (promoter) region of stolen genes constrained like that of viral genes?
+  Core viral: n = 289, median d_up/dS = 0.323 [IQR 0.16-0.52], Wilcoxon vs 1: p < 1e-10; median upstream length 81 nt
+  Core algal-like: n = 71, median d_up/dS = 0.422 [IQR 0.27-0.62], Wilcoxon vs 1: p < 1e-10; median upstream length 102 nt
+  Accessory algal-like: n = 78, median d_up/dS = 0.645 [IQR 0.35-1.21], Wilcoxon vs 1: p = 4.2e-04; median upstream length 109 nt
+  Accessory ORFan: n = 326, median d_up/dS = 0.457 [IQR 0.21-0.84], Wilcoxon vs 1: p < 1e-10; median upstream length 104 nt
+  KW across classes: H = 45.1, p = 8.7e-10
+  stolen vs core viral: MWU p = 7.6e-09, Cliff's delta = 0.43
+
+# Gene decay: fraction of truncated copies (<80% of OG median length) per clade-OG
+                      size   mean  median
+class                                    
+Core viral             600  0.003     0.0
+Core algal-like        132  0.003     0.0
+Accessory algal-like   127  0.003     0.0
+Accessory ORFan        711  0.014     0.0
+  KW H = 22.6, p = 5.0e-05
+                        hypothetical protein Accessory algal-like  0.017  0.000              29.7   0.002      0.000            NaN
+OG00319 JF411744.1|g0093     PBCV1_A185R                            hypothetical protein Accessory algal-like  0.054  0.000              31.0   0.027      0.107          0.071
+OG00194 JF411744.1|g0369     PBCV1_A666L                                 ABC transporter Accessory algal-like  0.059  0.000              60.1     NaN        NaN          1.091
+OG00220 JF411744.1|g0134     PBCV1_A260R                                       chitenase Accessory algal-like  0.059  0.000              23.2   0.006      0.020          2.717
+OG00198 JF411744.1|g0092             NaN                                             NaN Accessory algal-like  0.065  0.000              33.1   0.006      0.060          1.584
+OG00237 JF411744.1|g0047     PBCV1_A100R Glutamine:fructose-6-phosphate amidotransferase Accessory algal-like  0.074  0.000               NaN     NaN        NaN          0.454
+OG00210 JF411744.1|g0053     PBCV1_A118R                      nucleotide-sugar epimerase Accessory algal-like  0.081  0.000               NaN     NaN        NaN            NaN
+OG00200 JF411744.1|g0022     PBCV1_A053R                            hypothetical protein Accessory algal-like  0.098  0.000              48.3   0.014      0.146          2.105
+OG00217 JF411744.1|g0153     PBCV1_A295L                      nucleotide-sugar epimerase Accessory algal-like  0.099  0.000               NaN     NaN        NaN          1.097
+OG00566 JF411744.1|g0027     PBCV1_A064R                               methyltransferase Accessory algal-like  0.111  0.000              31.0   0.017      0.007          0.343
+OG00251 JF411744.1|g0017     PBCV1_A044L                  clamp loader of DNA polymerase Accessory algal-like  0.114  0.000              32.4   0.049      0.021          0.082
+OG00351 JF411744.1|g0090 PBCV1_A181/182R                                       Chitinase Accessory algal-like  0.120  0.000              43.3   0.006      0.024            NaN
+OG00216 JF411744.1|g0335     PBCV1_A609L                       UDP-glucose dehydrogenase Accessory algal-like  0.124  0.000              26.9   0.010      0.008          0.469
+OG00297 JF411744.1|g0083     PBCV1_A169R                      Aspartate transcarbamylase Accessory algal-like  0.148  0.000              57.4     NaN        NaN          0.654
+OG00192 JF411744.1|g0019     PBCV1_A049L                               phosphodiesterase Accessory algal-like  0.239  0.000               NaN     NaN        NaN            NaN
+OG00380 JF411744.1|g0061     PBCV1_A133R                            hypothetical protein Accessory algal-like  0.248  0.000              34.8   0.018      0.025          0.095
+OG00258 JF411744.1|g0355     PBCV1_A638R                         Agmatine iminohydrolase Accessory algal-like  0.252  0.000              45.2     NaN        NaN          0.520
+OG00234 JF411744.1|g0370     PBCV1_A672R                            hypothetical protein Accessory algal-like  0.276  0.000              38.9   0.025      0.053            NaN
+OG00605 JF411744.1|g0177     PBCV1_A330R                            hypothetical protein Accessory algal-like  0.290  0.000               NaN   0.004      0.022          0.000
+OG00221 JF411744.1|g0185     PBCV1_A350R                            hypothetical protein Accessory algal-like  0.358  0.006              37.3   0.036      0.050          2.108
+OG00222 JF411744.1|g0140     PBCV1_A271L                            hypothetical protein Accessory algal-like  0.373  0.001              28.6     NaN        NaN          1.957
+OG00209 JF411744.1|g0089     PBCV1_A180R                            hypothetical protein Accessory algal-like  0.397  0.076              35.8     NaN        NaN          0.785
+OG00289 JF411744.1|g0345     PBCV1_A624R                            hypothetical protein Accessory algal-like  0.466  0.120               NaN     NaN        NaN          0.000

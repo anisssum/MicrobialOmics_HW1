@@ -3,15 +3,14 @@ channels: [conda-forge, bioconda]
 dependencies:
   - python=3.11
   - prodigal=2.6.3
-  - mmseqs2
-  - diamond
-  - mafft
-  - iqtree>=2.3
-  - paml=4.10
-  - biopython
-  - pandas
+  - mmseqs2=18.8cc5c
+  - diamond=2.2.8
+  - mafft=7.526
+  - iqtree=3.1.4
+  - paml=4.10.10
+  - biopython=1.88
+  - pandas=3.0.6
   - numpy
-  - scipy
-  - statsmodels
-  - matplotlib
-  - python-pptx  # only for building the slide deck (optional)
+  - scipy=1.17.1
+  - statsmodels=0.15.0
+  - matplotlib-base=3.11.2
