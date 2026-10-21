@@ -115,7 +115,7 @@ All numbers are in [`results/stats.txt`](results/stats.txt).
 ## Reproduce
 
 ```bash
-git clone <this repo> && cd ncldv-gene-package
+git clone https://github.com/anisssum/MicrobialOmics_HW1.git && cd MicrobialOmics_HW1
 conda env create -f environment.yml && conda activate ncldv-gene-package
 bash run_all.sh            # downloads data from NCBI, then runs steps 01–06 (~2 h on 2 cores)
 ```
