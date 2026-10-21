@@ -136,7 +136,7 @@ scripts/00_download.py ... 06_stats_figures.py
 results/figures/               Fig1–Fig3 (PDF, vector + PNG 300 dpi)
 results/tables/                genome_clades, orthogroups_classified, dnds_per_gene, tests
 results/stats.txt              every number quoted in the slides/README
-slides/                        5-minute presentation (PDF export)
+slides/                        5-minute presentation (link + export)
 ```
 
 ## Limitations
